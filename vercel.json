@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.php"
+    }
+  ],
+  "env": {
+    "APP_SECRET_KEY": "@app_secret_key",
+    "ADMIN_LOG_KEY": "@admin_log_key",
+    "RATE_LIMIT_PER_HOUR": "100",
+    "CACHE_TTL": "3600",
+    "LOG_RETENTION_DAYS": "7",
+    "APP_ENV": "production",
+    "CORS_ORIGINS": "*"
+  }
+}

@@ -36,7 +36,7 @@ class HentaisTubeScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $hentais = [];
 
-            $crawler->filter('ul.ul_sidebar > li')->each(function (Crawler $node) use (&$hentais) {
+            $crawler->filter('ul.ul_sidebar > li')->each(function ( $node) use (&$hentais) {
                 $link = $this->extractAttr($node, 'div.rt a.series', 'href');
                 $title = $this->extractText($node, 'div.rt a.series');
                 $thumbnail = $this->extractAttr($node, 'img', 'src');
@@ -81,7 +81,7 @@ class HentaisTubeScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $episodes = [];
 
-            $crawler->filter('div.epiContainer:first-child div.epiItem > a')->each(function (Crawler $node) use (&$episodes) {
+            $crawler->filter('div.epiContainer:first-child div.epiItem > a')->each(function ( $node) use (&$episodes) {
                 $link = $node->attr('href');
                 $title = $node->attr('title') ?: $this->extractText($node, 'div');
                 $thumbnail = $this->extractAttr($node, 'img', 'src');
@@ -124,7 +124,7 @@ class HentaisTubeScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $results = [];
 
-            $crawler->filter('a[href*="/anime/"], a[href*="/hentai/"]')->each(function (Crawler $node) use (&$results) {
+            $crawler->filter('a[href*="/anime/"], a[href*="/hentai/"]')->each(function ( $node) use (&$results) {
                 $link = $node->attr('href');
                 $title = $node->attr('title') ?: $this->extractText($node, 'div');
                 $thumbnail = $this->extractAttr($node, 'img', 'src');
@@ -169,7 +169,7 @@ class HentaisTubeScraper extends BaseScraper
             
             // Episódios
             $episodes = [];
-            $crawler->filter('ul.pagAniListaContainer > li > a')->each(function (Crawler $node) use (&$episodes) {
+            $crawler->filter('ul.pagAniListaContainer > li > a')->each(function ( $node) use (&$episodes) {
                 $name = $this->sanitize($node->text());
                 $url = $node->attr('href');
                 

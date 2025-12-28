@@ -172,19 +172,19 @@ class ThreeHentaiScraper extends BaseScraper
             
             // Tags
             $tags = [];
-            $crawler->filter('div.tag-container a[href*="/tags/"]')->each(function (Crawler $node) use (&$tags) {
+            $crawler->filter('div.tag-container a[href*="/tags/"]')->each(function ( $node) use (&$tags) {
                 $tags[] = $this->sanitize($node->text());
             });
             
             // Artistas
             $artists = [];
-            $crawler->filter('div.tag-container a[href*="/artists/"]')->each(function (Crawler $node) use (&$artists) {
+            $crawler->filter('div.tag-container a[href*="/artists/"]')->each(function ( $node) use (&$artists) {
                 $artists[] = $this->sanitize($node->text());
             });
             
             // Grupos
             $groups = [];
-            $crawler->filter('div.tag-container a[href*="/groups/"]')->each(function (Crawler $node) use (&$groups) {
+            $crawler->filter('div.tag-container a[href*="/groups/"]')->each(function ( $node) use (&$groups) {
                 $groups[] = $this->sanitize($node->text());
             });
             
@@ -237,7 +237,7 @@ class ThreeHentaiScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $pages = [];
 
-            $crawler->filter('img')->each(function (Crawler $node) use (&$pages) {
+            $crawler->filter('img')->each(function ( $node) use (&$pages) {
                 $src = $node->attr('data-src') ?: $node->attr('src');
                 
                 if ($src && 
@@ -266,7 +266,7 @@ class ThreeHentaiScraper extends BaseScraper
         $crawler = $this->crawl($html);
         $mangas = [];
 
-        $crawler->filter('a[href*="/d/"]')->each(function (Crawler $node) use (&$mangas) {
+        $crawler->filter('a[href*="/d/"]')->each(function ( $node) use (&$mangas) {
             $href = $node->attr('href');
             $title = $this->extractText($node, 'div');
             $thumbnail = $this->extractAttr($node, 'img', 'src');

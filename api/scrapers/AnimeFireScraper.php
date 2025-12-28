@@ -37,7 +37,7 @@ class AnimeFireScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $animes = [];
 
-            $crawler->filter('article.cardUltimosEps > a')->each(function (Crawler $node) use (&$animes) {
+            $crawler->filter('article.cardUltimosEps > a')->each(function ( $node) use (&$animes) {
                 $title = $this->extractText($node, 'h3.animeTitle');
                 $href = $node->attr('href');
                 $thumbnail = $this->extractAttr($node, 'img', 'data-src');
@@ -84,7 +84,7 @@ class AnimeFireScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $animes = [];
 
-            $crawler->filter('article.cardUltimosEps > a')->each(function (Crawler $node) use (&$animes) {
+            $crawler->filter('article.cardUltimosEps > a')->each(function ( $node) use (&$animes) {
                 $title = $this->extractText($node, 'h3.animeTitle');
                 $href = $node->attr('href');
                 $thumbnail = $this->extractAttr($node, 'img', 'data-src');
@@ -149,7 +149,7 @@ class AnimeFireScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $animes = [];
 
-            $crawler->filter('article.cardUltimosEps > a')->each(function (Crawler $node) use (&$animes) {
+            $crawler->filter('article.cardUltimosEps > a')->each(function ( $node) use (&$animes) {
                 $title = $this->extractText($node, 'h3.animeTitle');
                 $href = $node->attr('href');
                 $thumbnail = $this->extractAttr($node, 'img', 'data-src');
@@ -199,7 +199,7 @@ class AnimeFireScraper extends BaseScraper
             
             // Gêneros
             $genres = [];
-            $crawler->filter('a.spanGeneros')->each(function (Crawler $node) use (&$genres) {
+            $crawler->filter('a.spanGeneros')->each(function ( $node) use (&$genres) {
                 $genres[] = $this->sanitize($node->text());
             });
 
@@ -238,7 +238,7 @@ class AnimeFireScraper extends BaseScraper
             $crawler = $this->crawl($html);
             $allEpisodes = [];
 
-            $crawler->filter('div.div_video_list > a')->each(function (Crawler $node) use (&$allEpisodes) {
+            $crawler->filter('div.div_video_list > a')->each(function ( $node) use (&$allEpisodes) {
                 $href = $node->attr('href');
                 $name = $this->sanitize($node->text());
                 

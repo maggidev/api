@@ -15,17 +15,23 @@ abstract class BaseScraper
     protected array $headers;
 
     public function __construct(string $baseUrl)
-    {
-        $this->baseUrl = $baseUrl;
-        $this->headers = DEFAULT_HEADERS;
-        
-        $this->client = new Client([
-            'timeout' => REQUEST_TIMEOUT,
-            'verify' => false,
-            'http_errors' => false,
-            'headers' => $this->headers
-        ]);
-    }
+{
+    $this->baseUrl = $baseUrl;
+    $this->headers = DEFAULT_HEADERS;
+
+    $this->client = new Client([
+        'timeout' => REQUEST_TIMEOUT,
+        'verify' => false,
+        'http_errors' => false,
+        'headers' => array_merge($this->headers, [
+            'Accept-Encoding' => 'gzip, deflate'  // Força o servidor a não mandar brotli
+        ]),
+        'decode_content' => true,  // Auto-descomprime gzip/deflate
+        'curl' => [
+            CURLOPT_ENCODING => 'gzip, deflate',  // Desativa brotli no nível curl
+        ]
+    ]);
+}
 
     /**
      * Faz requisição GET

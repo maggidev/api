@@ -19,16 +19,27 @@ abstract class BaseScraper
     $this->baseUrl = $baseUrl;
     $this->headers = DEFAULT_HEADERS;
 
-    // Remove Accept-Encoding pra evitar brotli
-    unset($this->headers['Accept-Encoding']);
+    // Headers extra pra parecer browser real
+    $extraHeaders = [
+        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language' => 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Sec-Fetch-Mode' => 'navigate',
+        'Sec-Fetch-Site' => 'none',
+        'Sec-Fetch-User' => '?1',
+        'Upgrade-Insecure-Requests' => '1',
+        'Cache-Control' => 'max-age=0',
+    ];
 
     $this->client = new Client([
         'timeout' => REQUEST_TIMEOUT,
         'verify' => false,
         'http_errors' => false,
-        'headers' => $this->headers,
+        'headers' => array_merge($this->headers, $extraHeaders),
         'curl' => [
-            CURLOPT_ENCODING => '',  // String vazia desativa todas as compressões automáticas
+            CURLOPT_ENCODING => 'gzip, deflate',  // evita brotli
+            CURLOPT_USERAGENT => $this->headers['User-Agent'],
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => 5,
         ]
     ]);
 }

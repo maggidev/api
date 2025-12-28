@@ -11,13 +11,4 @@
       "dest": "/index.php"
     }
   ],
-  "env": {
-    "APP_SECRET_KEY": "@app_secret_key",
-    "ADMIN_LOG_KEY": "@admin_log_key",
-    "RATE_LIMIT_PER_HOUR": "100",
-    "CACHE_TTL": "3600",
-    "LOG_RETENTION_DAYS": "7",
-    "APP_ENV": "production",
-    "CORS_ORIGINS": "*"
-  }
 }

@@ -19,16 +19,16 @@ abstract class BaseScraper
     $this->baseUrl = $baseUrl;
     $this->headers = DEFAULT_HEADERS;
 
+    // Remove Accept-Encoding pra evitar brotli
+    unset($this->headers['Accept-Encoding']);
+
     $this->client = new Client([
         'timeout' => REQUEST_TIMEOUT,
         'verify' => false,
         'http_errors' => false,
-        'headers' => array_merge($this->headers, [
-            'Accept-Encoding' => 'gzip, deflate'  // Força o servidor a não mandar brotli
-        ]),
-        'decode_content' => true,  // Auto-descomprime gzip/deflate
+        'headers' => $this->headers,
         'curl' => [
-            CURLOPT_ENCODING => 'gzip, deflate',  // Desativa brotli no nível curl
+            CURLOPT_ENCODING => '',  // String vazia desativa todas as compressões automáticas
         ]
     ]);
 }

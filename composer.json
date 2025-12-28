@@ -1,9 +1,9 @@
 {
-    "name": "anime-scraper/api",
+    "name": "maggidev/api",
     "description": "API RESTful para scraping de animes, mangás e hentais",
     "type": "project",
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "guzzlehttp/guzzle": "^7.8",
         "symfony/dom-crawler": "^6.4",
         "symfony/css-selector": "^6.4",
@@ -13,5 +13,17 @@
         "psr-4": {
             "AnimeScraper\\": "src/"
         }
-    }
+    },
+    "scripts": {
+        "vercel": [
+            "composer install --optimize-autoloader --no-dev --prefer-dist --no-progress --no-suggest --classmap-authoritative"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
